@@ -12,7 +12,7 @@ namespace DemoXamarinWebview
 		public MainPage()
 		{
 			InitializeComponent();
-            webView.Source = "https://www.google.co.th/";
+            webView.Source = "http://demo-web-end-to-end.azurewebsites.net/";
         }
         void backButtonClicked(object sender, EventArgs e)
         {

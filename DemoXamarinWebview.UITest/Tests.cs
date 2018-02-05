@@ -28,26 +28,23 @@ namespace DemoXamarinWebview.UITest
         [Test]
         public void AppLaunches()
         {
-            //app.Repl();
+            // app.Repl();
 
             //Arraning
-            string inputId = "#lst-ib";
-            string inputText = "xamarin";
-            string buttonId = "#tsbb";
-            Func<AppQuery, AppQuery> webView = e => e.Marked("myWebview");
+            string buttonId = "couponbutton";
+            string couponId = "qrcodecoupon"; 
 
             //Action
-            app.WaitForElement(webView, "Time out");
+            app.WaitForElement(c => c.WebView().Css($"#{buttonId}"), "Timed out waiting for button");
             app.Screenshot("First page");
-            app.Tap(c => c.WebView(0).Css(inputId));
-            app.EnterText(inputText);
-            app.Tap(c => c.WebView(0).Css(buttonId));
-            app.WaitForElement(c => c.WebView(0).Css(inputId), "Time out");
+            app.Tap(c => c.WebView(0).Css($"#{buttonId}"));
+            app.WaitForElement(c => c.WebView().Css($"#{couponId}"), "Timed out waiting for coupon");
             app.Screenshot("Second page");
-
+            
             //Asserting
-            var assert = app.Query(w => w.WebView().InvokeJS("return document.getElementById('lst-ib').value"))[0];
-            Assert.AreEqual(inputText, assert);
+            var assert = app.Query(w => w.WebView().InvokeJS("return document.getElementById('qrcodecoupon').id"))[0];
+            Assert.AreEqual(couponId, assert);
+            
         }
     }
 }
