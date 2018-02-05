@@ -32,7 +32,8 @@ namespace DemoXamarinWebview.UITest
 
             //Arraning
             string buttonId = "couponbutton";
-            string couponId = "qrcodecoupon"; 
+            string couponId = "qrcodecoupon";
+            var assert = string.Empty;
 
             //Action
             app.WaitForElement(c => c.WebView().Css($"#{buttonId}"), "Timed out waiting for button");
@@ -40,11 +41,19 @@ namespace DemoXamarinWebview.UITest
             app.Tap(c => c.WebView(0).Css($"#{buttonId}"));
             app.WaitForElement(c => c.WebView().Css($"#{couponId}"), "Timed out waiting for coupon");
             app.Screenshot("Second page");
-            
+
+
             //Asserting
-            var assert = app.Query(w => w.WebView().InvokeJS("return document.getElementById('qrcodecoupon').id"))[0];
+            if (platform == Platform.Android)
+            {
+                assert = app.Query(w => w.WebView().InvokeJS("return document.getElementById('qrcodecoupon').id"))[0];
+            }
+            else if (platform == Platform.iOS)
+            {
+                assert = app.Query(w => w.WebView().InvokeJS("document.getElementById('qrcodecoupon').id"))[0];
+            }
             Assert.AreEqual(couponId, assert);
-            
+
         }
     }
 }
