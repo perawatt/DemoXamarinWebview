@@ -15,6 +15,7 @@ namespace DemoXamarinWebview.UITest
                 return ConfigureApp
                     .Android
                     //.ApkFile("../../../DemoXamarinWebview/DemoXamarinWebview.Android/bin/Release/thes.dev.DemoXamarinWebview.apk")
+                    //.EnableLocalScreenshots()
                     .StartApp();
             }
 

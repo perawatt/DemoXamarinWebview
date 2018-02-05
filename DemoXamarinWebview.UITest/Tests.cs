@@ -38,10 +38,12 @@ namespace DemoXamarinWebview.UITest
 
             //Action
             app.WaitForElement(webView, "Time out");
+            app.Screenshot("First page");
             app.Tap(c => c.WebView(0).Css(inputId));
             app.EnterText(inputText);
             app.Tap(c => c.WebView(0).Css(buttonId));
             app.WaitForElement(c => c.WebView(0).Css(inputId), "Time out");
+            app.Screenshot("Second page");
 
             //Asserting
             var assert = app.Query(w => w.WebView().InvokeJS("return document.getElementById('lst-ib').value"))[0];
